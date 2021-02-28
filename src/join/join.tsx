@@ -14,14 +14,15 @@ export interface JoinProps {
 /**
  * Join an array of child components with the provided separator.
  */
-export const Join: React.VFC<JoinProps> = ({ separator, children }) =>
-  children.reduce(
-    (joined, child) => (
-      <>
-        {joined}
-        {separator}
-        {child}
-      </>
-    ),
-    <></>
-  );
+export const Join: React.VFC<JoinProps> = ({ separator, children }) => {
+  if (children.length === 0) {
+    return <></>;
+  }
+  return children.reduce((joined, child) => (
+    <>
+      {joined}
+      {separator}
+      {child}
+    </>
+  ));
+};
