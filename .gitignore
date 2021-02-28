@@ -3,3 +3,12 @@ node_modules
 
 # storybook build output
 storybook-static
+
+# TypeScript compilation output
+dist
+
+# Test Coverage reports
+coverage
+
+# logs
+yarn-error.log

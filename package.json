@@ -1,17 +1,21 @@
 {
-  "name": "ceramic",
-  "version": "1.0.0",
+  "name": "ceramic-components",
+  "version": "1.0.2",
   "description": "A reusable React component library",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc",
     "lint": "eslint src/** -f table",
     "test": "jest",
-    "storybook": "start-storybook -p 6006",
-    "deploy-storybook": "storybook-to-ghpages --source-branch main"
+    "test:coverage": "jest --collectCoverage",
+    "storybook:local": "start-storybook -p 6006",
+    "storybook:publish": "storybook-to-ghpages --source-branch main",
+    "prepare": "yarn clean && yarn build && node prepare-publish.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fildon/ceramic.git"
+    "url": "git+https://github.com/fildon/ceramic.git"
   },
   "keywords": [
     "react",
