@@ -2,4 +2,4 @@
 
 - Publish to NPM
 - Flesh out Readme
-- Add introduction.mdx as welcome page to storybook
+- Update introduction.stories.mdx once library is published to NPM
