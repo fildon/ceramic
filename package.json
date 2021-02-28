@@ -1,6 +1,6 @@
 {
   "name": "ceramic-components",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A reusable React component library",
   "main": "dist/index.js",
   "scripts": {
