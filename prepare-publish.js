@@ -14,6 +14,7 @@ function main() {
     "dist/package.json",
     Buffer.from(JSON.stringify(sourceObj, null, 2), "utf-8")
   );
+  fs.copyFileSync("README.md", "dist/README.md");
 }
 
 main();
