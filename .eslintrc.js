@@ -25,6 +25,7 @@ module.exports = {
   rules: {
     indent: [ERROR, 2],
     semi: [ERROR, "always"],
+    "react/prop-types": [OFF],
   },
   settings: {
     react: {

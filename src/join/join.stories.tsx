@@ -4,22 +4,36 @@ import { Story, Meta } from "@storybook/react";
 import { Join, JoinProps } from "./join";
 
 export default {
-  title: "Example/Join",
+  title: "Components/Join",
   component: Join,
 } as Meta;
 
 const Template: Story<JoinProps> = (args) => <Join {...args} />;
 
-export const TwoChildren = Template.bind({});
-TwoChildren.args = {
-  /* eslint-disable-next-line react/jsx-key */
-  children: [<span>foo</span>, <span>bar</span>],
-  separator: <br />,
+export const Default = Template.bind({});
+Default.args = {
+  children: ["foo", "bar", "buzz"].map((content) => (
+    <span key={content}>{content}</span>
+  )),
+  separator: "🌟",
 };
 
-export const ThreeChildren = Template.bind({});
-ThreeChildren.args = {
-  /* eslint-disable-next-line react/jsx-key */
-  children: [<span>foo</span>, <span>bar</span>, <span>buzz</span>],
-  separator: <br />,
+export const ThreeChildrenWithJSXSeparator = Template.bind({});
+ThreeChildrenWithJSXSeparator.args = {
+  children: ["foo", "bar", "buzz"].map((content) => (
+    <span key={content}>{content}</span>
+  )),
+  separator: <hr />,
+};
+
+const NullComponent = () => null;
+
+export const NullChildren = Template.bind({});
+NullChildren.args = {
+  children: [
+    <NullComponent key={0} />,
+    <NullComponent key={1} />,
+    <NullComponent key={2} />,
+  ],
+  separator: <hr />,
 };
