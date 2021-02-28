@@ -4,11 +4,10 @@
   "description": "React component library",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
     "lint": "eslint src/** -f table",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "deploy-storybook": "storybook-to-ghpages --source-branch main"
   },
   "repository": {
     "type": "git",
@@ -34,6 +33,7 @@
     "@storybook/addon-essentials": "^6.1.20",
     "@storybook/addon-links": "^6.1.20",
     "@storybook/react": "^6.1.20",
+    "@storybook/storybook-deployer": "^2.8.7",
     "@testing-library/react": "^11.2.5",
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.2",
