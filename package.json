@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint src/** -f table",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -36,7 +37,11 @@
     "@testing-library/react": "^11.2.5",
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
     "babel-loader": "^8.2.2",
+    "eslint": "^7.21.0",
+    "eslint-plugin-react": "^7.22.0",
     "jest": "^26.6.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

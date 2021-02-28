@@ -12,12 +12,14 @@ const Template: Story<JoinProps> = (args) => <Join {...args} />;
 
 export const TwoChildren = Template.bind({});
 TwoChildren.args = {
+  /* eslint-disable-next-line react/jsx-key */
   children: [<span>foo</span>, <span>bar</span>],
   separator: <br />,
 };
 
 export const ThreeChildren = Template.bind({});
 ThreeChildren.args = {
+  /* eslint-disable-next-line react/jsx-key */
   children: [<span>foo</span>, <span>bar</span>, <span>buzz</span>],
   separator: <br />,
 };
