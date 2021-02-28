@@ -1,7 +1,7 @@
 {
   "name": "ceramic",
   "version": "1.0.0",
-  "description": "React component library",
+  "description": "A reusable React component library",
   "main": "index.js",
   "scripts": {
     "lint": "eslint src/** -f table",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fildon/ceramic.git"
+    "url": "https://github.com/fildon/ceramic.git"
   },
   "keywords": [
     "react",

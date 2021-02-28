@@ -21,6 +21,7 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint"],
+  ignorePatterns: ["**/*.mdx"],
   rules: {
     indent: [ERROR, 2],
     semi: [ERROR, "always"],
