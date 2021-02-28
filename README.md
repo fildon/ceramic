@@ -6,6 +6,28 @@ Try out the components right now at the [Ceramic Components StoryBook](https://f
 
 Or you can view the source at the [Ceramic Homepage](https://github.com/fildon/ceramic).
 
+## Usage
+
+Using Ceramic couldn't be simpler. Just add `ceramic-components` as a dependency to your project:
+
+```bash
+yarn add ceramic-components
+```
+
+Or if you prefer NPM
+
+```bash
+npm install ceramic-components
+```
+
+Then wherever you would like to use a Ceramic component, for example:
+
+```js
+import { Join } from "ceramic-components";
+```
+
+Since Ceramic was built in TypeScript, type declaration files are included. Thanks to this Ceramic works seamlessly in either JavaScript or TypeScript projects.
+
 ## Development
 
 Just install the project dependencies:
