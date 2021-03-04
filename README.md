@@ -84,19 +84,12 @@ Publishing from other source branches is currently not supported.
 
 First ensure you updated the version in `package.json` according to [SemVer](https://semver.org/). NPM will reject any attempt to publish a version that has already been published. Each version must be unique.
 
-Additionally you will need to be logged in to NPM via the CLI. To do this:
-
-```bash
-npm login
-```
-
-And follow the provided prompts.
-
 Finally with the above taken into account, publishing to NPM is as simple as:
 
 ```bash
+yarn authenticate
 yarn prepare
-npm publish dist
+yarn publish dist
 ```
 
 ### Advanced build details
