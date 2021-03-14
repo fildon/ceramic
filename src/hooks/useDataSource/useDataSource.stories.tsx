@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Story, Meta } from "@storybook/react";
-import { DataResult, DataStates, useDataSource } from "./useDataSource";
+import { DataResult, useDataSource } from "./useDataSource";
 
 const dataSourceThatSucceeds = () =>
   new Promise<string>((resolve) => {
@@ -17,11 +17,11 @@ interface DisplayDataResultProps {
 }
 const DisplayDataResult = ({ dataResult }: DisplayDataResultProps) => {
   switch (dataResult.state) {
-    case DataStates.Error:
+    case "error":
       return <p>Sorry there was an error.</p>;
-    case DataStates.Loading:
+    case "loading":
       return <p>LOADING...</p>;
-    case DataStates.Success:
+    case "success":
       return <p>The data is: {dataResult.data}</p>;
   }
 };

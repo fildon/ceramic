@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react-dom/test-utils";
-import { useDataSource, DataStates } from "./useDataSource";
+import { useDataSource } from "./useDataSource";
 
 describe("useDataSource", () => {
   const mockSuccessfulDataSource = jest.fn().mockResolvedValue("mock data");
@@ -13,13 +13,13 @@ describe("useDataSource", () => {
 
     expect(mockSuccessfulDataSource).toHaveBeenCalled();
     expect(result.current).toMatchObject({
-      state: DataStates.Loading,
+      state: "loading",
     });
 
     await waitForNextUpdate();
 
     expect(result.current).toMatchObject({
-      state: DataStates.Success,
+      state: "success",
       data: "mock data",
     });
   });
@@ -31,13 +31,13 @@ describe("useDataSource", () => {
 
     expect(mockFailingDataSource).toHaveBeenCalled();
     expect(result.current).toMatchObject({
-      state: DataStates.Loading,
+      state: "loading",
     });
 
     await waitForNextUpdate();
 
     expect(result.current).toMatchObject({
-      state: DataStates.Error,
+      state: "error",
     });
   });
 
@@ -53,13 +53,13 @@ describe("useDataSource", () => {
     );
 
     expect(result.current).toMatchObject({
-      state: DataStates.Loading,
+      state: "loading",
     });
 
     await waitForNextUpdate();
 
     expect(result.current).toMatchObject({
-      state: DataStates.Success,
+      state: "success",
       data: 1,
     });
 
@@ -68,13 +68,13 @@ describe("useDataSource", () => {
     });
 
     expect(result.current).toMatchObject({
-      state: DataStates.Loading,
+      state: "loading",
     });
 
     await waitForNextUpdate();
 
     expect(result.current).toMatchObject({
-      state: DataStates.Success,
+      state: "success",
       data: 2,
     });
   });

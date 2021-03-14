@@ -1,26 +1,19 @@
 import * as React from "react";
 
-export enum DataStates {
-  Loading,
-  Error,
-  Success,
-}
+type Refreshable = { refresh: () => void };
 
 type DataSuccess<T> = {
-  state: DataStates.Success;
+  state: "success";
   data: T;
-  refresh: () => void;
-};
+} & Refreshable;
 
 type DataError = {
-  state: DataStates.Error;
-  refresh: () => void;
-};
+  state: "error";
+} & Refreshable;
 
 type DataLoading = {
-  state: DataStates.Loading;
-  refresh: () => void;
-};
+  state: "loading";
+} & Refreshable;
 
 export type DataResult<T> = DataSuccess<T> | DataError | DataLoading;
 
@@ -40,15 +33,15 @@ export function useDataSource<T>(dataSource: () => Promise<T>): DataResult<T> {
   React.useEffect(refresh, []);
 
   if (error) {
-    return { state: DataStates.Error, refresh };
+    return { state: "error", refresh };
   }
 
   if (loading) {
-    return { state: DataStates.Loading, refresh };
+    return { state: "loading", refresh };
   }
 
   if (data) {
-    return { state: DataStates.Success, data, refresh };
+    return { state: "success", data, refresh };
   }
 
   // TODO refactor the above so that this line is not necessary
