@@ -30,7 +30,7 @@ export function useDataSource<T>(dataSource: () => Promise<T>): DataState<T> {
     setError(false);
     dataSource()
       .then(setData)
-      .catch(() => setError(true))
+      .catch(() => setError(true)) // TODO do something with the caught error?
       .finally(() => setLoading(false));
   }, []);
 

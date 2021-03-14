@@ -2,13 +2,22 @@ import * as React from "react";
 import { Story, Meta } from "@storybook/react";
 import { useDataSource } from "./useDataSource";
 
-const demoDataSource = () =>
+const dataSourceThatSucceeds = () =>
   new Promise<string>((resolve) => {
-    setTimeout(() => resolve("you got the data!"), 100 + Math.random() * 2000);
+    setTimeout(() => resolve("you got the data!"), 1000);
   });
 
-const DemoUseDataSource: React.VFC = () => {
-  const dataResult = useDataSource(() => demoDataSource());
+const dataSourceThatFails = () =>
+  new Promise<string>((_resolve, reject) => {
+    setTimeout(() => reject("Your internet is down"), 1000);
+  });
+
+interface DemoUseDataSourceProps {
+  dataSource: () => Promise<string>;
+}
+
+const DemoUseDataSource = ({ dataSource }: DemoUseDataSourceProps) => {
+  const dataResult = useDataSource(() => dataSource());
 
   if (dataResult.error) {
     return <span>Sorry there was an error.</span>;
@@ -26,6 +35,16 @@ export default {
   component: DemoUseDataSource,
 } as Meta;
 
-const Template: Story = () => <DemoUseDataSource />;
+const Template: Story<DemoUseDataSourceProps> = (args) => (
+  <DemoUseDataSource {...args} />
+);
 
-export const Default = Template.bind({});
+export const DataSourceSuccess = Template.bind({});
+DataSourceSuccess.args = {
+  dataSource: dataSourceThatSucceeds,
+};
+
+export const DataSourceFailure = Template.bind({});
+DataSourceFailure.args = {
+  dataSource: dataSourceThatFails,
+};
