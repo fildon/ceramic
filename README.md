@@ -87,7 +87,7 @@ First ensure you updated the version in `package.json` according to [SemVer](htt
 Finally with the above taken into account, publishing to NPM is as simple as:
 
 ```bash
-yarn authenticate
+yarn login
 yarn prepare
 yarn publish dist
 ```
