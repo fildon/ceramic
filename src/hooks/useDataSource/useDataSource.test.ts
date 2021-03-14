@@ -2,21 +2,50 @@ import { renderHook } from "@testing-library/react-hooks";
 import { useDataSource } from "./useDataSource";
 
 describe("useDataSource", () => {
-  const mockDataSource = jest.fn().mockResolvedValue("mock data");
+  const mockSuccessfulDataSource = jest.fn().mockResolvedValue("mock data");
+  const mockFailingDataSource = jest.fn().mockRejectedValue("mock error");
 
-  it("calls the dataSource on mount", async () => {
-    const { waitForNextUpdate } = renderHook(() =>
-      useDataSource(mockDataSource)
+  it("initially returns DataLoading then DataSuccess", async () => {
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useDataSource(mockSuccessfulDataSource)
     );
+
+    expect(mockSuccessfulDataSource).toHaveBeenCalled();
+    expect(result.current).toMatchObject({
+      data: null,
+      error: false,
+      loading: true,
+    });
 
     await waitForNextUpdate();
 
-    expect(mockDataSource).toHaveBeenCalled();
+    expect(result.current).toMatchObject({
+      data: "mock data",
+      error: false,
+      loading: false,
+    });
   });
 
-  it.todo("error case");
+  it("returns DataError in case of failing data source", async () => {
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useDataSource(mockFailingDataSource)
+    );
 
-  it.todo("loading case");
+    expect(mockFailingDataSource).toHaveBeenCalled();
+    expect(result.current).toMatchObject({
+      data: null,
+      error: false,
+      loading: true,
+    });
+
+    await waitForNextUpdate();
+
+    expect(result.current).toMatchObject({
+      data: null,
+      error: true,
+      loading: false,
+    });
+  });
 
   it.todo("feature: force data refetch");
 
