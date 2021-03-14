@@ -18,7 +18,7 @@ interface DataLoading {
   loading: true;
 }
 
-type DataState<T> = DataSuccess<T> | DataError | DataLoading;
+export type DataState<T> = DataSuccess<T> | DataError | DataLoading;
 
 export function useDataSource<T>(dataSource: () => Promise<T>): DataState<T> {
   const [data, setData] = React.useState<T | undefined>();
@@ -49,22 +49,3 @@ export function useDataSource<T>(dataSource: () => Promise<T>): DataState<T> {
   // TODO think about this
   throw new Error("This shouldn't be possible");
 }
-
-const demoDataSource = () =>
-  new Promise<string>((resolve) => {
-    setTimeout(() => resolve("you got the data!"), 100 + Math.random() * 2000);
-  });
-
-export const DemoUseDataSource: React.VFC = () => {
-  const dataResult = useDataSource(() => demoDataSource());
-
-  if (dataResult.error) {
-    return <span>Sorry there was an error.</span>;
-  }
-
-  if (dataResult.loading) {
-    return <span>LOADING...</span>;
-  }
-
-  return <span>The data is: {dataResult.data}</span>;
-};
