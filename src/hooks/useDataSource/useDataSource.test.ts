@@ -1,5 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
-import { useDataSource } from "./useDataSource";
+import { act } from "react-dom/test-utils";
+import { useDataSource, DataStates } from "./useDataSource";
 
 describe("useDataSource", () => {
   const mockSuccessfulDataSource = jest.fn().mockResolvedValue("mock data");
@@ -12,17 +13,14 @@ describe("useDataSource", () => {
 
     expect(mockSuccessfulDataSource).toHaveBeenCalled();
     expect(result.current).toMatchObject({
-      data: null,
-      error: false,
-      loading: true,
+      state: DataStates.Loading,
     });
 
     await waitForNextUpdate();
 
     expect(result.current).toMatchObject({
+      state: DataStates.Success,
       data: "mock data",
-      error: false,
-      loading: false,
     });
   });
 
@@ -33,21 +31,53 @@ describe("useDataSource", () => {
 
     expect(mockFailingDataSource).toHaveBeenCalled();
     expect(result.current).toMatchObject({
-      data: null,
-      error: false,
-      loading: true,
+      state: DataStates.Loading,
     });
 
     await waitForNextUpdate();
 
     expect(result.current).toMatchObject({
-      data: null,
-      error: true,
-      loading: false,
+      state: DataStates.Error,
     });
   });
 
-  it.todo("feature: force data refetch");
+  it("returns a refresh callback which invokes the original data source again", async () => {
+    let counter = 0;
+    const mockDataSourceThatCounts = jest.fn().mockImplementation(() => {
+      counter++;
+      return Promise.resolve(counter);
+    });
+
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useDataSource(mockDataSourceThatCounts)
+    );
+
+    expect(result.current).toMatchObject({
+      state: DataStates.Loading,
+    });
+
+    await waitForNextUpdate();
+
+    expect(result.current).toMatchObject({
+      state: DataStates.Success,
+      data: 1,
+    });
+
+    act(() => {
+      result.current.refresh();
+    });
+
+    expect(result.current).toMatchObject({
+      state: DataStates.Loading,
+    });
+
+    await waitForNextUpdate();
+
+    expect(result.current).toMatchObject({
+      state: DataStates.Success,
+      data: 2,
+    });
+  });
 
   it.todo("feature: dependency array that triggers data refetch");
 });

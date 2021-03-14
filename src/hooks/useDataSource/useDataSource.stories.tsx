@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Story, Meta } from "@storybook/react";
-import { DataState, useDataSource } from "./useDataSource";
+import { DataResult, DataStates, useDataSource } from "./useDataSource";
 
 const dataSourceThatSucceeds = () =>
   new Promise<string>((resolve) => {
@@ -13,18 +13,17 @@ const dataSourceThatFails = () =>
   });
 
 interface DisplayDataResultProps {
-  dataResult: DataState<string>;
+  dataResult: DataResult<string>;
 }
 const DisplayDataResult = ({ dataResult }: DisplayDataResultProps) => {
-  if (dataResult.error) {
-    return <span>Sorry there was an error.</span>;
+  switch (dataResult.state) {
+    case DataStates.Error:
+      return <p>Sorry there was an error.</p>;
+    case DataStates.Loading:
+      return <p>LOADING...</p>;
+    case DataStates.Success:
+      return <p>The data is: {dataResult.data}</p>;
   }
-
-  if (dataResult.loading) {
-    return <span>LOADING...</span>;
-  }
-
-  return <span>The data is: {dataResult.data}</span>;
 };
 
 interface DemoUseDataSourceProps {
@@ -37,11 +36,25 @@ const DemoUseDataSource = ({ dataSource, message }: DemoUseDataSourceProps) => {
   return (
     <>
       <p>
-        This component is a simply a harness for demonstrating the useDataSource
-        hook. Below is a data display is mounted with the hook, which after
-        about one second will <em>{message}</em>.
+        This component is simply a harness for demonstrating the useDataSource
+        hook. Below a data display is mounted with the hook, which after about
+        one second will <em>{message}</em>.
+      </p>
+      <p>
+        The hook returns an object containing:
+        <ul>
+          <li>
+            State: a state enum indicating one of Error, Loading, Success.
+          </li>
+          <li>Data: if and only if the state is successful.</li>
+          <li>
+            Refresh: a callback which can be invoked to refetch the data from
+            the source.
+          </li>
+        </ul>
       </p>
       <DisplayDataResult dataResult={dataResult} />
+      <button onClick={dataResult.refresh}>Click me to force a refetch.</button>
     </>
   );
 };

@@ -1,51 +1,56 @@
 import * as React from "react";
 
-interface DataSuccess<T> {
+export enum DataStates {
+  Loading,
+  Error,
+  Success,
+}
+
+type DataSuccess<T> = {
+  state: DataStates.Success;
   data: T;
-  error: false;
-  loading: false;
-}
+  refresh: () => void;
+};
 
-interface DataError {
-  data: null;
-  error: true;
-  loading: false;
-}
+type DataError = {
+  state: DataStates.Error;
+  refresh: () => void;
+};
 
-interface DataLoading {
-  data: null;
-  error: false;
-  loading: true;
-}
+type DataLoading = {
+  state: DataStates.Loading;
+  refresh: () => void;
+};
 
-export type DataState<T> = DataSuccess<T> | DataError | DataLoading;
+export type DataResult<T> = DataSuccess<T> | DataError | DataLoading;
 
-export function useDataSource<T>(dataSource: () => Promise<T>): DataState<T> {
+export function useDataSource<T>(dataSource: () => Promise<T>): DataResult<T> {
   const [data, setData] = React.useState<T | undefined>();
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState(false);
-
-  React.useEffect(() => {
+  const refresh = React.useCallback(() => {
     setLoading(true);
     setError(false);
     dataSource()
-      .then(setData)
+      .then((newData) => setData(newData))
       .catch(() => setError(true)) // TODO do something with the caught error?
       .finally(() => setLoading(false));
   }, []);
 
+  React.useEffect(refresh, []);
+
   if (error) {
-    return { data: null, error, loading: false };
+    return { state: DataStates.Error, refresh };
   }
 
   if (loading) {
-    return { data: null, error: false, loading };
+    return { state: DataStates.Loading, refresh };
   }
 
   if (data) {
-    return { data, error, loading };
+    return { state: DataStates.Success, data, refresh };
   }
 
-  // TODO think about this
+  // TODO refactor the above so that this line is not necessary
   throw new Error("This shouldn't be possible");
 }

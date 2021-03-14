@@ -19,7 +19,7 @@
   "plugins": ["react", "@typescript-eslint"],
   "ignorePatterns": ["**/*.mdx"],
   "rules": {
-    "indent": [2, 2],
+    "indent": [2, 2, { "SwitchCase": 1 }],
     "semi": [2, "always"],
     "no-warning-comments": [1],
     "react/prop-types": [0]
