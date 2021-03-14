@@ -11,7 +11,7 @@
     "test:coverage": "jest --collectCoverage",
     "storybook:local": "start-storybook -p 6006",
     "storybook:publish": "storybook-to-ghpages --source-branch main",
-    "prepare": "yarn clean && yarn build && node prepare-publish.ts"
+    "prepare-publish": "yarn clean && yarn build && node prepare-publish.js"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/react-hooks": "^5.1.0",
     "@types/jest": "^26.0.20",
-    "@types/react": "^17.0.2",
+    "@types/react": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
     "babel-loader": "^8.2.2",
@@ -54,5 +54,8 @@
     "ts-node": "^9.1.1",
     "typescript": "^4.2.2"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "resolutions": {
+    "@types/react": "^17.0.3"
+  }
 }

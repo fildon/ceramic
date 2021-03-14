@@ -88,7 +88,7 @@ Finally with the above taken into account, publishing to NPM is as simple as:
 
 ```bash
 yarn login
-yarn prepare
+yarn prepare-publish
 yarn publish dist
 ```
 
