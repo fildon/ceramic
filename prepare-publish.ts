@@ -1,4 +1,4 @@
-const fs = require("fs");
+import * as fs from "fs";
 
 function main() {
   const source = fs
