@@ -17,4 +17,8 @@ describe("useDataSource", () => {
   it.todo("error case");
 
   it.todo("loading case");
+
+  it.todo("feature: force data refetch");
+
+  it.todo("feature: dependency array that triggers data refetch");
 });
