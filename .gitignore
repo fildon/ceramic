@@ -9,6 +9,3 @@ dist
 
 # Test Coverage reports
 coverage
-
-# logs
-yarn-error.log
