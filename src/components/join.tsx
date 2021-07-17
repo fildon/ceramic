@@ -20,7 +20,7 @@ export interface JoinProps {
  * that child were present. This is rarely desirable, but we leave it to the consuming code
  * to ensure that the children passed are exactly those that are expected to render.
  */
-export const Join: React.VFC<JoinProps> = ({ separator, children }) => (
+export const Join = ({ separator, children }: JoinProps): JSX.Element => (
   <>
     {children.reduce((joined, child) => (
       <>
