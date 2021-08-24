@@ -28,7 +28,6 @@
     "storybook:local": "start-storybook -p 6006",
     "storybook:publish": "storybook-to-ghpages --source-branch main"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@storybook/addon-actions": "^6.3.4",
