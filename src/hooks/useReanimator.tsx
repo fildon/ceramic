@@ -13,7 +13,7 @@ export const useReanimator = (deps: React.DependencyList): Reanimator => {
     ref.current.style.animation = "none";
     ref.current.offsetHeight;
     ref.current.style.animation = "";
-  }, [ref, ...deps]);
+  }, deps);
 
   return { ref };
 };

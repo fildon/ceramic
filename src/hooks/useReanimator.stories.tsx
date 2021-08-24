@@ -8,8 +8,10 @@ export default {
 } as Meta;
 
 const Template: Story = () => {
-  const [count, setCount] = React.useState(0);
-  const { ref } = useReanimator([count]);
+  const [firstCount, setFirstCount] = React.useState(0);
+  const { ref: firstAnimator } = useReanimator([firstCount]);
+  const [secondCount, setSecondCount] = React.useState(0);
+  const { ref: secondAnimator } = useReanimator([secondCount]);
   return (
     <>
       <p>
@@ -24,11 +26,17 @@ const Template: Story = () => {
         This counter demo will reanimate the count each time it changes. Click
         on <code>Show code</code> in the Docs tab to see how this example works.
       </p>
-      <button onClick={() => setCount(count - 1)}>-</button>
-      <span ref={ref} className="animate-drop">
-        {count}
+      <button onClick={() => setFirstCount(firstCount - 1)}>-</button>
+      <span ref={firstAnimator} className="animate-drop">
+        {firstCount}
       </span>
-      <button onClick={() => setCount(count + 1)}>+</button>
+      <button onClick={() => setFirstCount(firstCount + 1)}>+</button>
+      <br />
+      <button onClick={() => setSecondCount(secondCount - 1)}>-</button>
+      <span ref={secondAnimator} className="animate-drop">
+        {secondCount}
+      </span>
+      <button onClick={() => setSecondCount(secondCount + 1)}>+</button>
     </>
   );
 };
