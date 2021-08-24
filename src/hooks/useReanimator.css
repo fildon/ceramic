@@ -1,0 +1,17 @@
+/* This CSS exists solely to demonstrate using the useReanimator hook in storybook */
+
+.animate-drop {
+  position: relative;
+  animation-duration: 1s;
+  animation-name: drop;
+}
+
+@keyframes drop {
+  from {
+    bottom: 20px;
+  }
+
+  to {
+    bottom: 0;
+  }
+}

@@ -20,8 +20,9 @@
     "url": "git+https://github.com/fildon/ceramic.git"
   },
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "yarn clean && tsc && cp package.json README.md ./dist",
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "postbuild": "cp package.json README.md ./dist",
     "lint": "eslint src/** -f table",
     "test": "jest",
     "test:coverage": "jest --collectCoverage",
@@ -48,6 +49,7 @@
     "babel-loader": "^8.2.2",
     "eslint": "^7.21.0",
     "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "jest": "^27.0.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
