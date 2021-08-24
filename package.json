@@ -23,7 +23,7 @@
     "prebuild": "rm -rf dist",
     "build": "tsc",
     "postbuild": "cp package.json README.md ./dist",
-    "lint": "eslint src/** -f table",
+    "lint": "eslint ./src/ --ext .js,.jsx,.ts,.tsx",
     "test": "jest",
     "test:coverage": "jest --collectCoverage",
     "storybook:local": "start-storybook -p 6006",
