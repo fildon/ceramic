@@ -11,7 +11,7 @@ Or you can view the source at the [Ceramic Homepage](https://github.com/fildon/c
 Using Ceramic couldn't be simpler. Just add `ceramic-components` as a dependency to your project:
 
 ```bash
-yarn add ceramic-components
+npm add ceramic-components
 ```
 
 Or if you prefer NPM
@@ -33,13 +33,13 @@ Since Ceramic was built in TypeScript, type declaration files are included. Than
 Just install the project dependencies:
 
 ```bash
-yarn install
+npm install
 ```
 
 Then to run the StoryBook locally:
 
 ```bash
-yarn storybook:local
+npm storybook:local
 ```
 
 A StoryBook should appear, displaying all the current stories. This script supports hot module reloading, so feel free to change a component and see its stories update right away.
@@ -51,7 +51,7 @@ Linting is provided by ESLint and a handful of plugins. Additionally we recommen
 You can run the linter with:
 
 ```bash
-yarn lint
+npm lint
 ```
 
 ## Testing
@@ -61,11 +61,11 @@ Testing is provided by [Jest](https://jestjs.io/) and [React Testing Library](ht
 You can run the tests with:
 
 ```bash
-yarn test
+npm test
 ```
 
 Or if you also want test coverage analysis:
 
 ```bash
-yarn test:coverage
+npm test:coverage
 ```
